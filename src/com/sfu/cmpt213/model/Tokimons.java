@@ -34,6 +34,9 @@ public class Tokimons {
         return tokimons.remove(index);
     }
 
+    public void replaceTokimon(int index, Tokimon tokimon) {
+        tokimons.set(index, tokimon);
+    }
 
     public Tokimon getTokimon(int index) throws IllegalArgumentException {
         if (index < 0 || index > tokimons.size()) {
@@ -52,4 +55,6 @@ public class Tokimons {
                 "tokimons = " + tokimons +
                 " }";
     }
+
+
 }

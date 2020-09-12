@@ -39,6 +39,7 @@ public class Main {
                     deleteToki();
                     break;
                 case 4:
+                    alterToki();
                     break;
                 case 5:
                     break;
@@ -180,7 +181,7 @@ public class Main {
         }
 
         // display information to abort
-        System.out.println("\t\t0 to Abort");
+        System.out.println("\t\t(0 to Abort)");
 
         int userSelection = getUserSelection(0, tokimons.numTokimons());
 
@@ -190,5 +191,48 @@ public class Main {
 
         Tokimon tokimon = tokimons.getTokimon(userSelection - 1);
         tokimons.deleteTokimon(tokimon);
+    }
+
+    private static void alterToki() {
+        System.out.println("********************");
+        System.out.println("* Modify a Tokimon *");
+        System.out.println("********************");
+
+        // list of all the tokimons
+        displayAllTokis();
+
+        if (tokimons.numTokimons() == 0) {
+            return;
+        }
+
+        // display information to abort
+        System.out.println("\t\t(0 to Abort)");
+
+        int userSelection = getUserSelection(0, tokimons.numTokimons());
+
+        // abort if user selects 0
+        if (userSelection == 0) {
+            return;
+        }
+
+        Tokimon tokimon = tokimons.getTokimon(userSelection - 1);
+
+        int maxAcceptableChange_Positive = 100 - tokimon.getStrength();
+        System.out.println("Modify Strength by: ");
+
+        /*
+        Bound the user to enter either negative of the current strength to make
+        the strength 0 or
+        set the upper bound to allow the new strength to be 100.
+         */
+        int userStrength = getUserSelection(tokimon.getStrength() * -1, maxAcceptableChange_Positive); // strength input from the user
+
+        final int NEW_STRENGTH = tokimon.getStrength() + userStrength;
+
+        // Since the new values are bound to be between [0, 100]
+        // therefore, no try-catch block is required
+        tokimon.setStrength(NEW_STRENGTH);
+
+        tokimons.replaceTokimon(userSelection - 1, tokimon);
     }
 }
