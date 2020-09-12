@@ -1,10 +1,54 @@
 package com.sfu.cmpt213.ui;
 
+import com.sfu.cmpt213.model.Tokimon;
+import com.sfu.cmpt213.model.Tokimons;
+
+import java.util.Scanner;
+
 public class Main {
 
+    private static Tokimons tokimons;
+
     public static void main(String[] args) {
+
+        // initialize the tokimons
+        tokimons = new Tokimons();
+
         displayApplicationHeader();
-        displayMainMenu();
+
+
+        boolean shallContinue = true;
+        while (shallContinue) {
+
+            displayMainMenu();
+
+            // Get user selection for main menu
+            int userSelection = getUserSelection(1, 6);
+
+            switch (userSelection) {
+                case 1:
+                    System.out.println("********************");
+                    System.out.println("* List of Tokimons *");
+                    System.out.println("********************");
+                    displayAllTokis();
+                    break;
+                case 2:
+                    addNewToki();
+                    break;
+                case 3:
+                    deleteToki();
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
+                case 6:
+                    shallContinue = false;
+                    System.out.println("Have a good day!");
+                    break;
+            }
+        }
+
     }
 
     private static void displayApplicationHeader() {
@@ -20,7 +64,7 @@ public class Main {
         System.out.println("* Main Menu *");
         System.out.println("*************");
 
-        int count = 0;
+        int count = 1;
 
         System.out.println("\t" + count++ + ". List Tokimons");
         System.out.println("\t" + count++ + ". Add a new Tokimon");
@@ -28,5 +72,123 @@ public class Main {
         System.out.println("\t" + count++ + ". Change Tokimon Strength");
         System.out.println("\t" + count++ + ". DEBUG: Dump Objects (toString)");
         System.out.println("\t" + count++ + ". Exit");
+    }
+
+    private static int getUserSelection(int minParam, int maxParam) {
+        Scanner scanner = new Scanner(System.in);
+
+        int userSelection;
+        do {
+            System.out.print("\t> ");
+            userSelection = scanner.nextInt();
+        } while (userSelection < minParam || userSelection > maxParam);
+
+        return userSelection;
+    }
+
+    private static void displayAllTokis() {
+        if (tokimons.numTokimons() == 0) {
+            System.out.println("### No Tokimons Found ###");
+            return;
+        }
+
+        for (int i = 0; i < tokimons.numTokimons(); i++) {
+            int displayIndex = i + 1;
+            System.out.println("\t" + displayIndex + ". " + tokimons.getTokimon(i).toString());
+        }
+    }
+
+    private static void addNewToki() {
+        Tokimon tokimon = new Tokimon();
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("\tEnter Tokimon's");
+
+        while (true) {
+            System.out.print("\t\tName: ");
+            String name = scanner.nextLine();
+
+            try {
+                tokimon.setName(name);
+                break; // execute break if no exception is caught
+            } catch (Exception e) {
+                System.out.println("\tERR: " + e.getMessage());
+            }
+        }
+
+        while (true) {
+            System.out.print("\t\tType: ");
+            String type = scanner.nextLine();
+
+            try {
+                tokimon.setType(type);
+                break;
+            } catch (Exception e) {
+                System.out.println("\tERR: " + e.getMessage());
+            }
+        }
+
+        while (true) {
+            System.out.print("\t\tHeight: ");
+            double height = scanner.nextDouble();
+
+            try {
+                tokimon.setHeight(height);
+                break;
+            } catch (Exception e) {
+                System.out.println("\tERR: " + e.getMessage());
+            }
+        }
+
+        while (true) {
+            System.out.print("\t\tWeight: ");
+            double weight = scanner.nextDouble();
+
+            try {
+                tokimon.setWeight(weight);
+                break;
+            } catch (Exception e) {
+                System.out.println("\tERR: " + e.getMessage());
+            }
+        }
+
+        while (true) {
+            System.out.print("\t\tStrength: ");
+            int strength = scanner.nextInt();
+
+            try {
+                tokimon.setStrength(strength);
+                break;
+            } catch (Exception e) {
+                System.out.println("\tERR: " + e.getMessage());
+            }
+        }
+
+        tokimons.addNewTokimon(tokimon);
+    }
+
+    private static void deleteToki() {
+        System.out.println("********************");
+        System.out.println("* Remove a Tokimon *");
+        System.out.println("********************");
+
+        // list all the tokimons
+        displayAllTokis();
+
+        if (tokimons.numTokimons() == 0) {
+            return;
+        }
+
+        // display information to abort
+        System.out.println("\t\t0 to Abort");
+
+        int userSelection = getUserSelection(0, tokimons.numTokimons());
+
+        if (userSelection == 0) {
+            return;
+        }
+
+        Tokimon tokimon = tokimons.getTokimon(userSelection - 1);
+        tokimons.deleteTokimon(tokimon);
     }
 }

@@ -16,17 +16,17 @@ public class Tokimons {
     Methods
      */
 
-    public void addNewToki(Tokimon tokimon) {
+    public void addNewTokimon(Tokimon tokimon) {
         tokimons.add(tokimon);
     }
 
     // Remove the tokimon using the tokimon object
-    public boolean deleteToki(Tokimon tokimon) {
+    public boolean deleteTokimon(Tokimon tokimon) {
         return tokimons.remove(tokimon);
     }
 
     // Remove the tokimon using index
-    public Tokimon deleteToki(int index) throws IllegalArgumentException {
+    public Tokimon deleteTokimon(int index) throws IllegalArgumentException {
         if (index < 0 || index > tokimons.size() - 1) {
             throw new IllegalArgumentException("Index out of bound");
         }
@@ -35,5 +35,21 @@ public class Tokimons {
     }
 
 
+    public Tokimon getTokimon(int index) throws IllegalArgumentException {
+        if (index < 0 || index > tokimons.size()) {
+            throw new IllegalArgumentException("Index out of bounds");
+        }
+        return tokimons.get(index);
+    }
 
+    public int numTokimons() {
+        return tokimons.size();
+    }
+
+    @Override
+    public String toString() {
+        return "Tokimons { " +
+                "tokimons = " + tokimons +
+                " }";
+    }
 }

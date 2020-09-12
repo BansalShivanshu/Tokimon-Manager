@@ -9,23 +9,33 @@ public class Tokimon {
     String mType; //Equivalent to abilities
     double mHeight;
     double mWeight;
+    int mStrength;
 
     /*
     Methods
      */
 
-    public Tokimon(String name, String type, double height, double weight) {
-        mName = name;
-        mType = type;
-        mHeight = height;
-        mWeight = weight;
+    public Tokimon() {
+        mName = "TO BE SET";
+        mType = "TO BE SET";
+        mHeight = -1;
+        mWeight = -1;
+        mStrength = -1;
+    }
+
+    public Tokimon(String name, String type, double height, double weight, int strength) {
+        setName(name);
+        setType(type);
+        setHeight(height);
+        setWeight(weight);
+        setStrength(strength);
     }
 
     /*
     Getters
      */
 
-    public String getmName() {
+    public String getName() {
         return mName;
     }
 
@@ -39,6 +49,10 @@ public class Tokimon {
 
     public double getWeight() {
         return mWeight;
+    }
+
+    public int getStrength() {
+        return mStrength;
     }
 
     /*
@@ -71,5 +85,21 @@ public class Tokimon {
             throw new IllegalArgumentException("Weight cannot be negative");
         }
         mWeight = weight;
+    }
+
+    public void setStrength(int strength) throws IllegalArgumentException {
+        if (strength < 0 || strength > 100) {
+            throw new IllegalArgumentException("Value of strength follows [0, 100] domain");
+        }
+        mStrength = strength;
+    }
+
+    @Override
+    public String toString() {
+        return  mName +
+                ", " + mType +
+                ", " + mHeight + " inch(s)" +
+                ", " + mWeight + "kg" +
+                ", " + mStrength + "/100 strength";
     }
 }
