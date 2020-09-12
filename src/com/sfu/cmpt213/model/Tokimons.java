@@ -2,6 +2,17 @@ package com.sfu.cmpt213.model;
 
 import java.util.Vector;
 
+/**
+ *  This class is used to handle multiple Tokimon objects
+ *  Allows addition, deletion, and modification of the
+ *  objects from the user interface.
+ *  User Interface is highly reliant on this class
+ *
+ * @studentNumber 301386409
+ * @author  Shivanshu Bansal
+ * @date    September 11, 2020
+ * @version 1.0
+ */
 public class Tokimons {
 
     // List of all the tokimons

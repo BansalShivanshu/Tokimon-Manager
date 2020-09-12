@@ -5,6 +5,16 @@ import com.sfu.cmpt213.model.Tokimons;
 
 import java.util.Scanner;
 
+/**
+ *  Represents the Main class for the UI of the Application
+ *  Deals with getting user input and manipulating data
+ *  accordingly along with excepption handling in consideration.
+ *
+ * @studentNumber 301386409
+ * @author  Shivanshu Bansal
+ * @date    September 11, 2020
+ * @version 1.0
+ */
 public class Main {
 
     private static Tokimons tokimons;
@@ -42,6 +52,7 @@ public class Main {
                     alterToki();
                     break;
                 case 5:
+                    dumpObjects();
                     break;
                 case 6:
                     shallContinue = false;
@@ -95,7 +106,14 @@ public class Main {
 
         for (int i = 0; i < tokimons.numTokimons(); i++) {
             int displayIndex = i + 1;
-            System.out.println("\t" + displayIndex + ". " + tokimons.getTokimon(i).toString());
+            System.out.println(
+                        "\t" + displayIndex + ". " +
+                        tokimons.getTokimon(i).getName() + ", " +
+                        tokimons.getTokimon(i).getType() + ", " +
+                        tokimons.getTokimon(i).getHeight() + " inch(s), " +
+                        tokimons.getTokimon(i).getWeight() + "Kg, " +
+                        tokimons.getTokimon(i).getStrength() + "/100 Strength"
+                    );
         }
     }
 
@@ -234,5 +252,21 @@ public class Main {
         tokimon.setStrength(NEW_STRENGTH);
 
         tokimons.replaceTokimon(userSelection - 1, tokimon);
+    }
+
+    private static void dumpObjects() {
+        System.out.println("*************");
+        System.out.println("* DATA DUMP *");
+        System.out.println("*************");
+
+        if (tokimons.numTokimons() == 0) {
+            System.out.println("### NO DATA FOUND ###");
+            return;
+        }
+
+        for (int i = 0; i < tokimons.numTokimons(); i++) {
+            int displayIndex = i + 1;
+            System.out.println("\t" + displayIndex + ". " + tokimons.getTokimon(i).toString());
+        }
     }
 }

@@ -1,5 +1,16 @@
 package com.sfu.cmpt213.model;
 
+/**
+ *  Object Tokimon is a model representation of the rabbit
+ *  like rare creature found in remote areas of Korea.
+ *  Object consits of collection of name, type (abilities),
+ *  height, weight, and strength.
+ *
+ * @studentNumber 301386409
+ * @author Shivanshu Bansal
+ * @date September 11, 2020
+ * @version 1.0
+ */
 public class Tokimon {
 
     /*
@@ -96,10 +107,11 @@ public class Tokimon {
 
     @Override
     public String toString() {
-        return  mName +
-                ", " + mType +
-                ", " + mHeight + " inch(s)" +
-                ", " + mWeight + "kg" +
-                ", " + mStrength + "/100 strength";
+        return  this.getClass().getCanonicalName() +
+                "[Name: " + mName +
+                "; Type: " + mType +
+                "; Height: " + mHeight +
+                "; Weight: " + mWeight +
+                "; Strength: " + mStrength + "]";
     }
 }
